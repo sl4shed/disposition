@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import "7.css/dist/7.scoped.css"
+import "./window.css"
 
 const width = useState('width', () => 300);
 const height = useState('height', () => 300);
 const posX = useState('posX', () => 200);
 const posY = useState('posY', () => 200);
-const minWidth = useState('minWidth', () => 400);
+const minWidth = useState('minWidth', () => 200);
 const minHeight = useState('minHeight', () => 300);
 
 defineProps({
@@ -54,7 +54,7 @@ function onMouseMove(event: MouseEvent) {
     }
     if (resizeDir.includes("top")) {
         height.value = Math.max(minHeight.value, startHeight - dy);
-        if(height.value > minHeight.value) posY.value = startPosY + dy;
+        if (height.value > minHeight.value) posY.value = startPosY + dy;
     }
 }
 
@@ -68,7 +68,7 @@ function onMouseUp(event: MouseEvent) {
 function startDrag(event: MouseEvent) {
     event.preventDefault();
     console.log("aiojag;ihagaguiherg")
-    
+
     drag = true;
     startX = event.clientX;
     startY = event.clientY;
@@ -106,33 +106,33 @@ function minimize() {
 </script>
 
 <template>
-    <div class="win7">
-        <div class="window glass active" style="--w7-w-bg: #D9D9D9;" :style="{
-            width: width + 'px',
-            height: height + 'px',
-            left: posX + 'px',
-            top: posY + 'px'
-        }">
-            <div class="resize-bars">
-                <div class="resize-bar left" data-dir="left" @mousedown="resize"></div>
-                <div class="resize-bar right" data-dir="right" @mousedown="resize"></div>
-                <div class="resize-bar top" data-dir="top" @mousedown="resize"></div>
-                <div class="resize-bar bottom" data-dir="bottom" @mousedown="resize"></div>
-                <div class="resize-bar top-left" data-dir="top-left" @mousedown="resize"></div>
-                <div class="resize-bar top-right" data-dir="top-right" @mousedown="resize"></div>
-                <div class="resize-bar bottom-left" data-dir="bottom-left" @mousedown="resize"></div>
-                <div class="resize-bar bottom-right" data-dir="bottom-right" @mousedown="resize"></div>
-            </div>
+    <div class="window active" :style="{
+        width: width + 'px',
+        height: height + 'px',
+        left: posX + 'px',
+        top: posY + 'px'
+    }">
+        <div class="resize-bars">
+            <div class="resize-bar left" data-dir="left" @mousedown="resize"></div>
+            <div class="resize-bar right" data-dir="right" @mousedown="resize"></div>
+            <div class="resize-bar top" data-dir="top" @mousedown="resize"></div>
+            <div class="resize-bar bottom" data-dir="bottom" @mousedown="resize"></div>
+            <div class="resize-bar top-left" data-dir="top-left" @mousedown="resize"></div>
+            <div class="resize-bar top-right" data-dir="top-right" @mousedown="resize"></div>
+            <div class="resize-bar bottom-left" data-dir="bottom-left" @mousedown="resize"></div>
+            <div class="resize-bar bottom-right" data-dir="bottom-right" @mousedown="resize"></div>
+        </div>
 
-            <div class="title-bar" @mousedown="startDrag" style="background-attachment: local;">
-                <div class="title-bar-text">{{ title }}</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Minimize" @mousedown.stop @click="minimize"></button>
-                    <button aria-label="Close" @mousedown.stop @click="close"></button>
-                </div>
+        <div class="title-bar" @mousedown="startDrag" style="background-attachment: local;">
+            <div class="title-bar-text">{{ title }}</div>
+            <div class="title-bar-controls">
+                <button class="minimize" @mousedown.stop @click="minimize"></button>
+                <button class="close" @mousedown.stop @click="close"></button>
             </div>
+        </div>
 
-            <div class="window-body has-space">
+        <div class="window-background">
+            <div class="window-body">
                 <slot />
             </div>
         </div>
@@ -140,6 +140,8 @@ function minimize() {
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
 .title-bar-text {
     user-select: none;
 }
@@ -230,5 +232,9 @@ function minimize() {
 .window {
     position: absolute;
     left: 200px;
+}
+
+.window-body {
+    font-family: "Old Standard TT", serif;
 }
 </style>
