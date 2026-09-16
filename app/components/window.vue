@@ -5,13 +5,23 @@ const width = useState('width', () => 300);
 const height = useState('height', () => 300);
 const posX = useState('posX', () => 200);
 const posY = useState('posY', () => 200);
-const minWidth = useState('minWidth', () => 200);
-const minHeight = useState('minHeight', () => 300);
+// const minWidth = useState('minWidth', () => 200);
+// const minHeight = useState('minHeight', () => 300);
 
-defineProps({
+const {title, minWidth, minHeight} = defineProps({
     title: {
         type: String,
         required: true
+    },
+
+    minWidth: {
+        type: Number,
+        default: 200
+    },
+
+    minHeight: {
+        type: Number,
+        default: 300,
     }
 })
 
@@ -46,15 +56,15 @@ function onMouseMove(event: MouseEvent) {
     const dx = event.clientX - startX;
     const dy = event.clientY - startY;
 
-    if (resizeDir.includes("right")) width.value = Math.max(minWidth.value, startWidth + dx);
-    if (resizeDir.includes("bottom")) height.value = Math.max(minHeight.value, startHeight + dy);
+    if (resizeDir.includes("right")) width.value = Math.max(minWidth, startWidth + dx);
+    if (resizeDir.includes("bottom")) height.value = Math.max(minHeight, startHeight + dy);
     if (resizeDir.includes("left")) {
-        width.value = Math.max(minWidth.value, startWidth - dx);
-        if (width.value > minWidth.value) posX.value = startPosX + dx;
+        width.value = Math.max(minWidth, startWidth - dx);
+        if (width.value > minWidth) posX.value = startPosX + dx;
     }
     if (resizeDir.includes("top")) {
-        height.value = Math.max(minHeight.value, startHeight - dy);
-        if (height.value > minHeight.value) posY.value = startPosY + dy;
+        height.value = Math.max(minHeight, startHeight - dy);
+        if (height.value > minHeight) posY.value = startPosY + dy;
     }
 }
 
@@ -140,98 +150,8 @@ function minimize() {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
-
 .title-bar-text {
     user-select: none;
-}
-
-.resize-bars {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    user-select: none;
-    pointer-events: none;
-}
-
-.resize-bar {
-    user-select: all;
-    pointer-events: all;
-    position: absolute;
-    z-index: 20;
-}
-
-.resize-bar.left {
-    cursor: col-resize;
-    top: 0;
-    height: 100%;
-    left: 0;
-    width: 2px;
-}
-
-.resize-bar.right {
-    cursor: col-resize;
-    top: 0;
-    height: 100%;
-    right: 0;
-    width: 2px;
-}
-
-.resize-bar.top {
-    cursor: row-resize;
-    top: 0;
-    width: 100%;
-    left: 0;
-    height: 2px;
-}
-
-.resize-bar.bottom {
-    cursor: row-resize;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-    height: 2px;
-}
-
-.resize-bar.top-left {
-    cursor: nwse-resize;
-    width: 3px;
-    height: 3px;
-    z-index: 30;
-    top: 0;
-    left: 0;
-}
-
-.resize-bar.top-right {
-    cursor: nesw-resize;
-    width: 3px;
-    height: 3px;
-    z-index: 30;
-    top: 0;
-    right: 0;
-}
-
-.resize-bar.bottom-left {
-    cursor: nesw-resize;
-    width: 3px;
-    height: 3px;
-    z-index: 30;
-    bottom: 0;
-    left: 0;
-}
-
-.resize-bar.bottom-right {
-    cursor: nwse-resize;
-    width: 3px;
-    height: 3px;
-    z-index: 30;
-    bottom: 0;
-    right: 0;
-}
-
-.window {
-    position: absolute;
-    left: 200px;
 }
 
 .window-body {

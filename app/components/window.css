@@ -5,7 +5,10 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    position: absolute;
 }
+
+/* title bar */
 
 .title-bar {
     position: relative;
@@ -39,11 +42,12 @@
 
 .title-bar .title-bar-text {
     color: white;
+    font-family: 'Old Standard TT', serif;
 }
 
 .title-bar .title-bar-controls {
     display: flex;
-    gap: 2px;
+    gap: 5px;
     justify-content: end;
     align-items: center;
 }
@@ -75,6 +79,8 @@
     filter: brightness(0.5);
 }
 
+/* window content */
+
 .window-background {
     width: 100%;
     height: 100%;
@@ -83,13 +89,11 @@
             #d7d7d7 0px,
             #d7d7d7 6px,
             #9f9f9f 6px,
-            #9f9f9f 8px);
+            #9f9f9f 7px);
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 }
 
 .window-body {
@@ -100,4 +104,89 @@
     width: calc(100% - 20px);
     height: calc(100% - 10px);
     background-color: white;
+}
+
+/* resize bars */
+
+.resize-bars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.resize-bar {
+    user-select: all;
+    pointer-events: all;
+    position: absolute;
+    z-index: 20;
+}
+
+.resize-bar.left {
+    cursor: col-resize;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 3px;
+}
+
+.resize-bar.right {
+    cursor: col-resize;
+    top: 0;
+    height: 100%;
+    right: 0;
+    width: 3px;
+}
+
+.resize-bar.top {
+    cursor: row-resize;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 3px;
+}
+
+.resize-bar.bottom {
+    cursor: row-resize;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 3px;
+}
+
+.resize-bar.top-left {
+    cursor: nwse-resize;
+    width: 4px;
+    height: 4px;
+    z-index: 30;
+    top: 0;
+    left: 0;
+}
+
+.resize-bar.top-right {
+    cursor: nesw-resize;
+    width: 4px;
+    height: 4px;
+    z-index: 30;
+    top: 0;
+    right: 0;
+}
+
+.resize-bar.bottom-left {
+    cursor: nesw-resize;
+    width: 4px;
+    height: 4px;
+    z-index: 30;
+    bottom: 0;
+    left: 0;
+}
+
+.resize-bar.bottom-right {
+    cursor: nwse-resize;
+    width: 4px;
+    height: 4px;
+    z-index: 30;
+    bottom: 0;
+    right: 0;
 }
