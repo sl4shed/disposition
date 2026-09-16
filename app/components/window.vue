@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import "./window.css"
 
-const width = useState('width', () => 300);
-const height = useState('height', () => 300);
-const posX = useState('posX', () => 200);
-const posY = useState('posY', () => 200);
-// const minWidth = useState('minWidth', () => 200);
-// const minHeight = useState('minHeight', () => 300);
-
-const {title, minWidth, minHeight} = defineProps({
+const props = defineProps({
     title: {
         type: String,
         required: true
@@ -16,14 +9,31 @@ const {title, minWidth, minHeight} = defineProps({
 
     minWidth: {
         type: Number,
-        default: 200
+        default: 600
     },
 
     minHeight: {
         type: Number,
         default: 300,
+    },
+
+    width: {
+        type: Number,
+        default: 600
+    },
+
+    height: {
+        type: Number,
+        default: 300
     }
 })
+
+const width = useState('width', () => props.width);
+const height = useState('height', () => props.height);
+const posX = useState('posX', () => 200);
+const posY = useState('posY', () => 200);
+const minWidth = useState('minWidth', () => props.minWidth);
+const minHeight = useState('minHeight', () => props.minHeight);
 
 let resizeDir: string | null = null;
 let startX = 0, startY = 0;
@@ -56,15 +66,17 @@ function onMouseMove(event: MouseEvent) {
     const dx = event.clientX - startX;
     const dy = event.clientY - startY;
 
-    if (resizeDir.includes("right")) width.value = Math.max(minWidth, startWidth + dx);
-    if (resizeDir.includes("bottom")) height.value = Math.max(minHeight, startHeight + dy);
+    if (resizeDir.includes("right")) width.value = Math.max(minWidth.value, startWidth + dx);
+    if (resizeDir.includes("bottom")) height.value = Math.max(minHeight.value, startHeight + dy);
     if (resizeDir.includes("left")) {
-        width.value = Math.max(minWidth, startWidth - dx);
-        if (width.value > minWidth) posX.value = startPosX + dx;
+        width.value = Math.max(minWidth.value, startWidth - dx);
+        if (width.value > minWidth.value) {
+            posX.value = startPosX + dx;
+        }
     }
     if (resizeDir.includes("top")) {
-        height.value = Math.max(minHeight, startHeight - dy);
-        if (height.value > minHeight) posY.value = startPosY + dy;
+        height.value = Math.max(minHeight.value, startHeight - dy);
+        if (height.value > minHeight.value) posY.value = startPosY + dy;
     }
 }
 
@@ -141,10 +153,8 @@ function minimize() {
             </div>
         </div>
 
-        <div class="window-background">
-            <div class="window-body">
-                <slot />
-            </div>
+        <div class="window-body">
+            <slot />
         </div>
     </div>
 </template>

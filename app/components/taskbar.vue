@@ -8,6 +8,8 @@
             <button class="start"></button>
         </div>
 
+        <div class="divider"></div>
+
         <div class="middle">
             <slot />
         </div>
@@ -21,11 +23,11 @@
 <style>
 .taskbar {
     position: absolute;
-    width: calc(100vw - 20px);
+    width: 100vw;
     bottom: 0;
     left: 0;
 
-    height: 39px;
+    height: 35px;
     background: linear-gradient(180deg, #000 0%, #000 50%, #686868 100%);
 
     display: flex;
