@@ -16,6 +16,12 @@
 
         <div class="right">
             <!-- calendar, clock, announcements, idk -->
+
+            <div class="clock">
+                <p></p>
+                <p></p>
+            </div>
+            <div class="hours"></div>
         </div>
     </div>
 </template>
@@ -28,15 +34,37 @@
     left: 0;
 
     height: 35px;
-    background: linear-gradient(180deg, #000 0%, #000 50%, #686868 100%);
+    background: linear-gradient(180deg, #525252 0%, #000000 100%);
+    border-top: 2px solid #797979;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
+    gap: 10px;
+
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.divider {
+    height: 100%;
+    width: 2px;
+    background-color: #797979;
+}
+
+.middle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .start {

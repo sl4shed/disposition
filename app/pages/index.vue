@@ -10,6 +10,6 @@ import TaskbarItem from '~/components/taskbarItem.vue';
     <Welcome />
 
     <Taskbar>
-        <TaskbarItem :app="Welcome"/>
+        <!-- <TaskbarItem :app="Welcome"/> -->
     </Taskbar>
 </template>

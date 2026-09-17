@@ -19,7 +19,8 @@
     font-family: 'Old Standard TT', serif;
 }
 
-html, body {
+html,
+body {
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -31,12 +32,54 @@ body {
 }
 
 button {
-    border: 1px solid C6C6C4;
+    border: 1px solid #C6C6C4;
     border-style: solid;
     border-radius: 5px;
     background: linear-gradient(180deg, #F2F2F2 0%, #EDEDED 41%, #DDDDDD 56%);
-    font-family: 'Alagard', serif;
+    font-family: sans-serif;
     font-size: 15px;
+}
+
+/* shoutout https://moderncss.dev/pure-css-custom-checkbox-style/ */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1em;
+    height: 1em;
+    border: 1px solid #C6C6C4;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #F2F2F2 0%, #EDEDED 41%, #DDDDDD 56%);
+    transform: translateY(-0.1em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    z-index: 5;
+    background: black;
+    transform: scale(0);
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+label:has(input[type="checkbox"]) { /* stupid fix */
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 button:hover {

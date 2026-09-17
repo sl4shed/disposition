@@ -1,42 +1,149 @@
 <script setup lang="ts">
 import Window from "~/components/window.vue"
+
+let funFact = "I love eating shawarma.";
+
+function rsvp() {
+
+}
 </script>
 
 <template>
-    <Window title="Welcome!">
+    <Window title="Welcome!" :width="600" :height="300" :posX="700" :posY="300" :resizeable="false" :tool="true">
         <div class="content">
-            <h1>Welcome to <bold>Disposition</bold></h1>
+            <div class="header">
+                <div class="striped-bg">
+                    <img src="~/assets/logos/Disposition.png" alt="Disposition Logo" class="logo" />
+                    <span>
+                        <h2>Welcome to Disposition!</h2>
+                        <p>a physical-media based ysws</p>
+                    </span>
+                </div>
 
-            <div class="horizontal">
-                <div class="fun-fact">
-                </div>
-                
-                <div class="buttons">
-                    <button>Visit the shop</button>
-                    <button>Take a guided tour</button>
-                    <button>Manage your projects</button>
-                    <button>Read up on the documentation</button>
-                </div>
+                <div class="spacer"></div>
             </div>
 
-            <h2>Build projects, build your physical media collection!</h2>
+            <div class="main">
+                <h2>Build projects & build your music collection!</h2>
+
+                <div class="horizontal">
+                    <div class="fun-fact">
+                        <span>
+                            <img src="~/assets/logos/Docs.png" alt="Information Icon" width="40px" height="40px" />
+                            <h3>Fun Fact!</h3>
+                        </span>
+                        <p>{{ funFact }}</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button @click="rsvp">RSVP</button>
+                        <button>Coming soon</button>
+                        <button>Coming soon</button>
+                        <button>Coming soon</button>
+                    </div>
+                </div>
+
+                <label>
+                    <input type="checkbox" checked />
+                    Open this welcome screen the next time you open Disposition
+                </label>
+            </div>
         </div>
     </Window>
 </template>
 
 <style>
+.fun-fact p {
+    margin: 0;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.fun-fact span {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    gap: 5px;
+}
+
+.logo {
+    width: 88px;
+    height: 88px;
+
+    filter: drop-shadow(0 0 0.2rem black);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.striped-bg span h2 {
+    margin: 0;
+}
+
+.striped-bg span {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.striped-bg span p {
+    margin: 0;
+}
+
+.striped-bg {
+    width: 100%;
+
+    background: repeating-linear-gradient(0deg,
+            #d7d7d7 0px,
+            #d7d7d7 6px,
+            #9f9f9f 6px,
+            #9f9f9f 7px);
+    height: 80px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.main {
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.main h2 {
+    margin: 5px;
+    /* what the fuck?? why does this have so much margin bro :sob: */
+    margin-left: 0;
+}
+
+.spacer {
+    width: 100%;
+    height: 12px;
+    border: 1px solid #c6c6c4;
+    background-color: #dedede;
+}
+
 .content {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-
-    padding: 5px;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 5px;
 
     flex-grow: 1;
 }
@@ -51,7 +158,12 @@ import Window from "~/components/window.vue"
 .fun-fact {
     flex-grow: 5;
 
-    border-style:inset;
-    background-color: gray;
+    border-style: none;
+    background-color: #D9D9D9;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
 }
 </style>

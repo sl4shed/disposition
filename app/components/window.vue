@@ -25,13 +25,33 @@ const props = defineProps({
     height: {
         type: Number,
         default: 300
+    },
+
+    posX: {
+        type: Number,
+        default: 200,
+    },
+
+    posY: {
+        type: Number,
+        default: 200,
+    },
+
+    tool: {
+        type: Boolean,
+        default: false
+    },
+
+    resizeable: {
+        type: Boolean,
+        default: true
     }
 })
 
 const width = useState('width', () => props.width);
 const height = useState('height', () => props.height);
-const posX = useState('posX', () => 200);
-const posY = useState('posY', () => 200);
+const posX = useState('posX', () => props.posX);
+const posY = useState('posY', () => props.posY);
 const minWidth = useState('minWidth', () => props.minWidth);
 const minHeight = useState('minHeight', () => props.minHeight);
 
@@ -134,7 +154,7 @@ function minimize() {
         left: posX + 'px',
         top: posY + 'px'
     }">
-        <div class="resize-bars">
+        <div class="resize-bars" v-if="props.resizeable">
             <div class="resize-bar left" data-dir="left" @mousedown="resize"></div>
             <div class="resize-bar right" data-dir="right" @mousedown="resize"></div>
             <div class="resize-bar top" data-dir="top" @mousedown="resize"></div>
@@ -148,7 +168,7 @@ function minimize() {
         <div class="title-bar" @mousedown="startDrag" style="background-attachment: local;">
             <div class="title-bar-text">{{ title }}</div>
             <div class="title-bar-controls">
-                <button class="minimize" @mousedown.stop @click="minimize"></button>
+                <button v-if="!props.tool" class="minimize" @mousedown.stop @click="minimize"></button>
                 <button class="close" @mousedown.stop @click="close"></button>
             </div>
         </div>
