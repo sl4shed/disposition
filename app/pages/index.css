@@ -25,9 +25,16 @@ html, body {
     padding: 0;
 }
 
+body {
+    background-image: url("~/assets/wallpaper/whilst.png");
+    background-size: cover;
+}
+
 button {
-    border: 2px solid black;
-    background: linear-gradient(180deg, #BAB9B9 0%, #ececec 28%, #909090 100%);
+    border: 1px solid C6C6C4;
+    border-style: solid;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #F2F2F2 0%, #EDEDED 41%, #DDDDDD 56%);
     font-family: 'Alagard', serif;
     font-size: 15px;
 }
