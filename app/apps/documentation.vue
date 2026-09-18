@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import Window from "~/components/window.vue"
-
-let funFact = "I love eating shawarma.";
-
-function rsvp() {
-
-}
 </script>
 
 <template>
-    <Window title="Welcome!" :width="600" :height="310" :posX="700" :posY="300" :resizeable="false" :tool="true">
+    <Window title="Documentation Viewer" :pos-x="10">
         <div class="content">
             <div class="header">
                 <div class="striped-bg">
-                    <img src="~/assets/logos/Disposition.png" alt="Disposition Logo" class="logo" />
+                    <img src="~/assets/logos/Docs.png" alt="DispoDocs Logo" class="logo" />
                     <span>
-                        <h2>Welcome to Disposition!</h2>
-                        <p>a physical-media based ysws</p>
+                        <h2>DispoDocs</h2>
+                        <p>a pretty boring documentation viewer</p>
                     </span>
                 </div>
 
@@ -24,29 +18,7 @@ function rsvp() {
             </div>
 
             <div class="main">
-                <h2>Build projects & build your music collection!</h2>
-
-                <div class="horizontal">
-                    <div class="fun-fact">
-                        <span>
-                            <img src="~/assets/logos/Docs.png" alt="Information Icon" width="40px" height="40px" />
-                            <h3>Fun Fact!</h3>
-                        </span>
-                        <p>{{ funFact }}</p>
-                    </div>
-
-                    <div class="buttons">
-                        <button @click="rsvp">RSVP</button>
-                        <button>What's this about?</button>
-                        <button>Coming soon</button>
-                        <button>Coming soon</button>
-                    </div>
-                </div>
-
-                <label>
-                    <input type="checkbox" checked />
-                    Open this welcome screen the next time you open Disposition
-                </label>
+                
             </div>
         </div>
     </Window>
@@ -70,8 +42,8 @@ function rsvp() {
 }
 
 .logo {
-    width: 88px;
-    height: 88px;
+    width: 60px;
+    height: 60px;
 
     filter: drop-shadow(0 0 0.2rem black);
 }
@@ -108,6 +80,9 @@ function rsvp() {
 
     display: flex;
     flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 7px;
     gap: 2px;
 }
 

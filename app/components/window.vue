@@ -48,12 +48,13 @@ const props = defineProps({
     }
 })
 
-const width = useState('width', () => props.width);
-const height = useState('height', () => props.height);
-const posX = useState('posX', () => props.posX);
-const posY = useState('posY', () => props.posY);
-const minWidth = useState('minWidth', () => props.minWidth);
-const minHeight = useState('minHeight', () => props.minHeight);
+const instanceId = useId();
+const width = useState(`width-${instanceId}`, () => props.width);
+const height = useState(`height-${instanceId}`, () => props.height);
+const posX = useState(`posX-${instanceId}`, () => props.posX);
+const posY = useState(`posY-${instanceId}`, () => props.posY);
+const minWidth = useState(`minWidth-${instanceId}`, () => props.minWidth);
+const minHeight = useState(`minHeight-${instanceId}`, () => props.minHeight);
 
 let resizeDir: string | null = null;
 let startX = 0, startY = 0;
