@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Window from "~/components/window.vue"
+
+const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
+
 </script>
 
 <template>
@@ -18,7 +21,7 @@ import Window from "~/components/window.vue"
             </div>
 
             <div class="main">
-                
+                <ContentRenderer v-if="home" :value="home" />
             </div>
         </div>
     </Window>
@@ -97,48 +100,5 @@ import Window from "~/components/window.vue"
     gap: 4px;
 }
 
-.main h2 {
-    margin: 5px;
-    /* what the fuck?? why does this have so much margin bro :sob: */
-    margin-left: 0;
-}
 
-.spacer {
-    width: 100%;
-    height: 12px;
-    border: 1px solid #c6c6c4;
-    background-color: #dedede;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    flex-grow: 1;
-}
-
-.horizontal {
-    display: flex;
-    flex-direction: row;
-
-    gap: 3px;
-}
-
-.fun-fact {
-    flex-grow: 5;
-
-    border-style: none;
-    background-color: #D9D9D9;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 0;
-}
 </style>
