@@ -4,14 +4,33 @@ import Welcome from '~/apps/welcome.vue';
 import Documentation from '~/apps/documentation.vue';
 import Taskbar from '~/components/taskbar.vue';
 import TaskbarItem from '~/components/taskbarItem.vue';
+import { APPS } from "~/registry/apps";
 
+const {
+    windows,
+    focused,
+    open,
+    close,
+    focus,
+    minimize,
+    restore,
+    isFocused,
+    get,
+    isTypeOpen,
+} = useWindowManager();
+
+// open welcome for the first app
+if (!isTypeOpen("welcome")) open("welcome");
 </script>
 
 <template>
-    <Welcome />
-    <Documentation />
+    <Window v-for="w in windows" :key="w.id" :instance="w">
+        <Component :is="APPS[w.appId]?.component" />
+    </Window>
 
     <Taskbar>
-        <!-- <TaskbarItem :app="Welcome"/> -->
+        <template v-for="w in windows" :key="w.id">
+            <TaskbarItem v-if="!w.tool" :instance="w" />
+        </template>
     </Taskbar>
 </template>

@@ -1,75 +1,35 @@
-# Nuxt Minimal Starter
+# Disposition
+Disposition is a YSWS platform for an upcoming event (called disposition xd)!!
+You ship projects and we ship physical media (cds, vinyls and cassetes).
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+I think the edgier aesthetic of this website is pretty cool if you ask me :)
+
+Also, even though i can't say that anyone would WANT to self host it, here are some instructions:
 
 ## Setup
 
-Make sure to install dependencies:
-
+1. install dependencies
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+2. start dev server
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm run dev
 ```
+3. enjoy!  (for now, no db!)
 
 ## Production
 
-Build the application for production:
-
+1. build
 ```bash
-# npm
-npm run build
-
-# pnpm
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
+2. preview production build
 ```bash
-# npm
-npm run preview
-
-# pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## How twas' made
+Surprisingly, making a webos in nuxt isnt actually that difficult! It's actually easier! (can you believe it, the framework built to make your life easier while making websites makes your life easier while making websites?)
+
+Anyways, ive just always wanted to see a bit more of an unconventional website for a ysws so this is my go at that.

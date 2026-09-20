@@ -1,60 +1,21 @@
 <script setup lang="ts">
 import "./window.css"
+import type {WindowInstance} from "~/types/window"
 
-const props = defineProps({
-    title: {
-        type: String,
-        required: true
-    },
+const manager = useWindowManager();
+const props = withDefaults(defineProps<{
+  instance: WindowInstance
+}>(), {
 
-    minWidth: {
-        type: Number,
-        default: 600
-    },
-
-    minHeight: {
-        type: Number,
-        default: 300,
-    },
-
-    width: {
-        type: Number,
-        default: 600
-    },
-
-    height: {
-        type: Number,
-        default: 300
-    },
-
-    posX: {
-        type: Number,
-        default: 200,
-    },
-
-    posY: {
-        type: Number,
-        default: 200,
-    },
-
-    tool: {
-        type: Boolean,
-        default: false
-    },
-
-    resizeable: {
-        type: Boolean,
-        default: true
-    }
 })
 
 const instanceId = useId();
-const width = useState(`width-${instanceId}`, () => props.width);
-const height = useState(`height-${instanceId}`, () => props.height);
-const posX = useState(`posX-${instanceId}`, () => props.posX);
-const posY = useState(`posY-${instanceId}`, () => props.posY);
-const minWidth = useState(`minWidth-${instanceId}`, () => props.minWidth);
-const minHeight = useState(`minHeight-${instanceId}`, () => props.minHeight);
+const width = useState(`width-${instanceId}`, () => props.instance.width);
+const height = useState(`height-${instanceId}`, () => props.instance.height);
+const posX = useState(`posX-${instanceId}`, () => props.instance.posX);
+const posY = useState(`posY-${instanceId}`, () => props.instance.posY);
+const minWidth = useState(`minWidth-${instanceId}`, () => props.instance.minWidth);
+const minHeight = useState(`minHeight-${instanceId}`, () => props.instance.minHeight);
 
 let resizeDir: string | null = null;
 let startX = 0, startY = 0;
@@ -138,14 +99,6 @@ function onDragEnd(event: MouseEvent) {
     document.removeEventListener("mousemove", onDragMove);
     document.removeEventListener("mouseup", onDragEnd);
 }
-
-function close() {
-    console.log("close")
-}
-
-function minimize() {
-    console.log("minimize ")
-}
 </script>
 
 <template>
@@ -153,9 +106,10 @@ function minimize() {
         width: width + 'px',
         height: height + 'px',
         left: posX + 'px',
-        top: posY + 'px'
-    }">
-        <div class="resize-bars" v-if="props.resizeable">
+        top: posY + 'px',
+        zIndex: instance.z
+    }" @mousedown="manager.focus(instance.id)" v-show="!instance.minimized">
+        <div class="resize-bars" v-if="props.instance.resizeable">
             <div class="resize-bar left" data-dir="left" @mousedown="resize"></div>
             <div class="resize-bar right" data-dir="right" @mousedown="resize"></div>
             <div class="resize-bar top" data-dir="top" @mousedown="resize"></div>
@@ -167,10 +121,10 @@ function minimize() {
         </div>
 
         <div class="title-bar" @mousedown="startDrag" style="background-attachment: local;">
-            <div class="title-bar-text">{{ title }}</div>
+            <div class="title-bar-text">{{ instance.title }}</div>
             <div class="title-bar-controls">
-                <button v-if="!props.tool" class="minimize" @mousedown.stop @click="minimize"></button>
-                <button class="close" @mousedown.stop @click="close"></button>
+                <button v-if="!props.instance.tool" class="minimize" @mousedown.stop @click="manager.minimize(instance.id)"></button>
+                <button class="close" @mousedown.stop @click="manager.close(instance.id)"></button>
             </div>
         </div>
 

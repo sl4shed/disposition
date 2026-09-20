@@ -46,6 +46,8 @@
 
     padding-left: 10px;
     padding-right: 10px;
+
+    z-index: 10;
 }
 
 .divider {
@@ -59,6 +61,8 @@
     justify-content: start;
     align-items: center;
     width: 100%;
+
+    gap: 5px;
 }
 
 .left {

@@ -3,53 +3,54 @@ import Window from "~/components/window.vue"
 
 let funFact = "I love eating shawarma.";
 
+const manager = useWindowManager();
 function rsvp() {
-
+    
 }
 </script>
 
 <template>
-    <Window title="Welcome!" :width="600" :height="310" :posX="700" :posY="300" :resizeable="false" :tool="true">
-        <div class="content">
-            <div class="header">
-                <div class="striped-bg">
-                    <img src="~/assets/logos/Disposition.png" alt="Disposition Logo" class="logo" />
-                    <span>
-                        <h2>Welcome to Disposition!</h2>
-                        <p>a physical-media based ysws</p>
-                    </span>
-                </div>
-
-                <div class="spacer"></div>
+    <!-- <Window title="Welcome!" :width="600" :height="310" :posX="700" :posY="300" :resizeable="false" :tool="true"> -->
+    <div class="content">
+        <div class="header">
+            <div class="striped-bg">
+                <img src="~/assets/logos/Disposition.png" alt="Disposition Logo" class="logo" />
+                <span>
+                    <h2>Welcome to Disposition!</h2>
+                    <p>a physical-media based ysws</p>
+                </span>
             </div>
 
-            <div class="main">
-                <h2>Build projects & build your music collection!</h2>
-
-                <div class="horizontal">
-                    <div class="fun-fact">
-                        <span>
-                            <img src="~/assets/logos/Docs.png" alt="Information Icon" width="40px" height="40px" />
-                            <h3>Fun Fact!</h3>
-                        </span>
-                        <p>{{ funFact }}</p>
-                    </div>
-
-                    <div class="buttons">
-                        <button @click="rsvp">RSVP</button>
-                        <button>What's this about?</button>
-                        <button>Coming soon</button>
-                        <button>Coming soon</button>
-                    </div>
-                </div>
-
-                <label>
-                    <input type="checkbox" checked />
-                    Open this welcome screen the next time you open Disposition
-                </label>
-            </div>
+            <div class="spacer"></div>
         </div>
-    </Window>
+
+        <div class="main">
+            <h2>Build projects & build your music collection!</h2>
+
+            <div class="horizontal">
+                <div class="fun-fact">
+                    <span>
+                        <img src="~/assets/logos/Docs.png" alt="Information Icon" width="40px" height="40px" />
+                        <h3>Fun Fact!</h3>
+                    </span>
+                    <p>{{ funFact }}</p>
+                </div>
+
+                <div class="buttons">
+                    <button @click="rsvp">RSVP</button>
+                    <button @click="manager.open('documentation')">What's this about?</button>
+                    <button @click="manager.open('winver')">Information</button>
+                    <button>Coming soon</button>
+                </div>
+            </div>
+
+            <label>
+                <input type="checkbox" checked />
+                Open this welcome screen the next time you open Disposition
+            </label>
+        </div>
+    </div>
+    <!-- </Window> -->
 </template>
 
 <style scoped>

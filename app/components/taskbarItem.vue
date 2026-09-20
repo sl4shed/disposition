@@ -1,19 +1,31 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
+import { APPS } from '~/registry/apps';
+import { ICONS } from '~/registry/icons';
+import type { WindowInstance } from '~/types/window';
 
-defineProps<{
-    app: Component
+const manager = useWindowManager();
+const props = defineProps<{
+    instance: WindowInstance,
 }>()
 
 function open() {
-    console.log("open");
+    if(props.instance.minimized) {
+        manager.restore(props.instance.id);
+        manager.focus(props.instance.id);
+    } else {
+        manager.minimize(props.instance.id);
+    }
 }
 </script>
 
 <template>
     <div class="item" @click="open">
-        <button class="icon"></button>
-        <div class="open"></div>
+        <button class="icon" :style="{
+            backgroundImage: `url(${ICONS[instance.appId]})`
+        }"></button>
+        <div v-if="!instance.minimized" class="open"></div>
+        <div v-else class="minimized"></div>
     </div>
 
 </template>
@@ -23,9 +35,12 @@ function open() {
     width: 25px;
     height: 100%;
 
+    gap: 2px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .icon {
@@ -33,15 +48,24 @@ function open() {
     width: 25px;
     height: 25px;
 
-    background-image: url("~/assets/icons/shop.png");
+    background-image: url("~/app/icons/shop.png");
     background-size: cover;
 }
 
 .open {
-    position: absolute;
     bottom: 0;
     width: 20px;
-    left: 2.5px;
+    background-color: white;
+
+    height: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.minimized {
+    bottom: 0;
+    width: 5px;
+    background-color: white;
 
     height: 3px;
     border-top-left-radius: 3px;

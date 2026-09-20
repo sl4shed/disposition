@@ -1,47 +1,62 @@
 <script setup lang="ts">
-import Window from "~/components/window.vue"
+const { data: navigation } = await useAsyncData('nav', () =>
+    queryCollectionNavigation('content')
+)
 
-const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
+const currentPath = ref('/getting-started/index') // pick a sensible default
 
+const { data: home } = await useAsyncData(
+    () => queryCollection('content').path(currentPath.value).first(),
+    { watch: [currentPath] }
+)
+
+function selectArticle(path: string) {
+    currentPath.value = path
+}
 </script>
 
 <template>
-    <Window title="Documentation Viewer" :pos-x="10">
-        <div class="content">
-            <div class="header">
-                <div class="striped-bg">
-                    <img src="~/assets/logos/Docs.png" alt="DispoDocs Logo" class="logo" />
-                    <span>
-                        <h2>DispoDocs</h2>
-                        <p>a pretty boring documentation viewer</p>
-                    </span>
-                </div>
-
-                <div class="spacer"></div>
+    <div class="content">
+        <div class="header">
+            <div class="striped-bg">
+                <img src="~/assets/logos/Docs.png" alt="DispoDocs Logo" class="logo" />
+                <span>
+                    <h2>DispoDocs</h2>
+                    <p>a pretty boring documentation viewer</p>
+                </span>
             </div>
 
-            <div class="main">
-                <ContentRenderer v-if="home" :value="home" />
-            </div>
+            <div class="spacer"></div>
         </div>
-    </Window>
+
+        <div class="main">
+            <div class="sidebar">
+                <div class="category" v-for="cat in navigation" :key="cat.path">
+                    <h3>{{ cat.title }}</h3>
+                    <ul v-if="cat.children?.length">
+                        <li v-for="article in cat.children" :key="article.path">
+                            <a
+                                @click="selectArticle(article.path)"
+                                :class="{ active: currentPath === article.path }"
+                            >
+                                {{ article.title }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <ContentRenderer v-if="home" :value="home" />
+        </div>
+    </div>
 </template>
 
 <style scoped>
-.fun-fact p {
-    margin: 0;
-    padding-left: 10px;
-    padding-bottom: 10px;
-}
-
-.fun-fact span {
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    padding-left: 10px;
-    gap: 5px;
+.content {
+    width: 100%;
+    height: 100%;
 }
 
 .logo {
@@ -89,6 +104,13 @@ const { data: home } = await useAsyncData(() => queryCollection('content').path(
     gap: 2px;
 }
 
+.spacer {
+    width: 100%;
+    height: 12px;
+    border: 1px solid #c6c6c4;
+    background-color: #dedede;
+}
+
 .main {
     margin: 0;
     padding-left: 10px;
@@ -96,9 +118,32 @@ const { data: home } = await useAsyncData(() => queryCollection('content').path(
     padding-bottom: 5px;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 4px;
+
+    width: 100%;
+    height: 100%;
 }
 
+.sidebar {
+    height: 100%;
+    width: 300px;
 
+    flex-grow: 1;
+}
+
+.sidebar h3 {
+    background-color: #D9D9D9;
+}
+
+.sidebar a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divider {
+    width: 2px;
+    height: 100%;
+    background-color: #D9D9D9;
+}
 </style>
