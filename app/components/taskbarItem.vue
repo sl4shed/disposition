@@ -48,7 +48,6 @@ function open() {
     width: 25px;
     height: 25px;
 
-    background-image: url("~/app/icons/shop.png");
     background-size: cover;
 }
 
@@ -61,7 +60,7 @@ function open() {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-
+ 
 .minimized {
     bottom: 0;
     width: 5px;
