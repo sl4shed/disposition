@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     const savedState = getCookie(event, "oauth_state");
     deleteCookie(event, "oauth_state");
 
-    if(!code || !state || state !== savedState) {
+    if (!code || !state || state !== savedState) {
         throw createError({
             statusCode: 401,
             statusMessage: "Invalid OAuth State"
@@ -31,7 +31,15 @@ export default defineEventHandler(async (event) => {
         }
     });
 
-    console.log(identity);
+    await setUserSession(event, {
+        user: {
+            id: identity.id,
+            name: `${identity.first_name} ${identity.last_name}`,
+            email: identity.primary_email,
+            slack_id: identity.slack_id
+        },
+        secure: { hcRefreshToken: tokens.refresh_token }, // not exposed to client
+    })
 
     return sendRedirect(event, '/');
 });

@@ -4,13 +4,20 @@ import Window from "~/components/window.vue"
 let funFact = "I love eating shawarma.";
 
 const manager = useWindowManager();
-function rsvp() {
-    navigateTo('/oauth', { external: true });
+
+async function rsvp() {
+    const rsvp = document.getElementById("rsvp");
+
+    const loggedIn = await fetch('/oauth/loggedIn');
+    if(loggedIn.status == 200) {
+        rsvp!.innerText = "RSVP'd!";
+    } else {
+        manager.open("rsvp");
+    }
 }
 </script>
 
 <template>
-    <!-- <Window title="Welcome!" :width="600" :height="310" :posX="700" :posY="300" :resizeable="false" :tool="true"> -->
     <div class="content">
         <div class="header">
             <div class="striped-bg">
@@ -37,7 +44,7 @@ function rsvp() {
                 </div>
 
                 <div class="buttons">
-                    <button @click="rsvp">RSVP</button>
+                    <button @click="rsvp" id="rsvp">RSVP</button>
                     <button @click="manager.open('documentation')">What's this about?</button>
                     <button @click="manager.open('winver')">Information</button>
                     <button>Coming soon</button>
@@ -50,7 +57,6 @@ function rsvp() {
             </label>
         </div>
     </div>
-    <!-- </Window> -->
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@ import Welcome from "~/apps/welcome.vue"
 import Documentation from "~/apps/documentation.vue"
 import type { AppDef } from "~/types/window"
 import Winver from "~/apps/winver.vue"
+import Rsvp from "~/apps/rsvp.vue"
 
 export const APPS: { [key: string]: AppDef } = {
     welcome: {
@@ -44,5 +45,19 @@ export const APPS: { [key: string]: AppDef } = {
 
         tool: true,
         resizeable: false
+    },
+
+    rsvp: {
+        appId: 'rsvp',
+        title: 'RSVP',
+        component: Rsvp,
+
+        width: 500,
+        height: 150,
+        minWidth: 400,
+        minHeight: 150,
+
+        tool: true,
+        resizeable: true
     }
 }
