@@ -5,7 +5,7 @@ let funFact = "I love eating shawarma.";
 
 const manager = useWindowManager();
 function rsvp() {
-    
+    navigateTo('/oauth', { external: true });
 }
 </script>
 

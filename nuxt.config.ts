@@ -2,5 +2,16 @@
 export default defineNuxtConfig({
 	modules: ['@nuxt/content'],
 	compatibilityDate: '2025-07-15',
-	devtools: { enabled: true }
+	devtools: { enabled: true },
+
+	runtimeConfig: {
+		hackclub: {
+			clientId: process.env.HCA_CLIENT_ID,
+			clientSecret: process.env.HCA_CLIENT_SECRET
+		},
+
+		public: {
+			baseUrl: "http://localhost:3000"
+		}
+	}
 })
