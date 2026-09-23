@@ -25,12 +25,24 @@ export default defineEventHandler(async (event) => {
         }
     );
 
-    const identity = await $fetch<any>("https://auth.hackclub.com/api/v1/me", {
+    const response = await $fetch<{
+        identity: {
+            id: string;
+            first_name: string;
+            last_name: string;
+            primary_email: string;
+            slack_id: string;
+        };
+        scopes: string[];
+    }>("https://auth.hackclub.com/api/v1/me", {
         headers: {
             Authorization: `Bearer ${tokens.access_token}`
         }
     });
 
+    const identity = response.identity;
+
+    console.log(identity);
     await setUserSession(event, {
         user: {
             id: identity.id,

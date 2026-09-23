@@ -13,12 +13,18 @@ async function rsvp() {
         const rsvpResponse = await fetch('/rsvp');
         if (rsvpResponse.status == 200) {
             rsvp!.innerText = "RSVP'd!";
+        } else if (rsvpResponse.status == 409) {
+            rsvp!.innerText = "Already RSVP'd!";
         } else {
             rsvp!.innerText = "Error :(";
         }
     } else {
         manager.open("rsvp");
     }
+
+    setTimeout(() => {
+        rsvp!.innerText = "RSVP";
+    }, 5000);
 }
 </script>
 
