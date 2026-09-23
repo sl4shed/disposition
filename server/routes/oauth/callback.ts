@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
             id: identity.id,
             name: `${identity.first_name} ${identity.last_name}`,
             email: identity.primary_email,
-            slack_id: identity.slack_id
+            slackId: identity.slack_id
         },
         secure: { hcRefreshToken: tokens.refresh_token }, // not exposed to client
     })

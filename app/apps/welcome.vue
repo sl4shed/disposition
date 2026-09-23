@@ -9,8 +9,13 @@ async function rsvp() {
     const rsvp = document.getElementById("rsvp");
 
     const loggedIn = await fetch('/oauth/loggedIn');
-    if(loggedIn.status == 200) {
-        rsvp!.innerText = "RSVP'd!";
+    if (loggedIn.status == 200) {
+        const rsvpResponse = await fetch('/rsvp');
+        if (rsvpResponse.status == 200) {
+            rsvp!.innerText = "RSVP'd!";
+        } else {
+            rsvp!.innerText = "Error :(";
+        }
     } else {
         manager.open("rsvp");
     }
