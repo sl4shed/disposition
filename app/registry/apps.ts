@@ -3,6 +3,7 @@ import Documentation from "~/apps/documentation.vue"
 import type { AppDef } from "~/types/window"
 import Winver from "~/apps/winver.vue"
 import Rsvp from "~/apps/rsvp.vue"
+import Run from "~/apps/run.vue"
 
 export const APPS: { [key: string]: AppDef } = {
     welcome: {
@@ -38,10 +39,10 @@ export const APPS: { [key: string]: AppDef } = {
         title: 'DispoVer',
         component: Winver,
 
-        width: 350,
-        height: 430,
-        minWidth: 350,
-        minHeight: 430,
+        width: 650,
+        height: 320,
+        minWidth: 650,
+        minHeight: 320,
 
         tool: true,
         resizeable: false
@@ -59,5 +60,19 @@ export const APPS: { [key: string]: AppDef } = {
 
         tool: true,
         resizeable: true
-    }
+    },
+
+    run: {
+        appId: 'run',
+        title: 'DispoRun',
+        component: Run,
+
+        width: 320,
+        height: 200,
+        minWidth: 320,
+        minHeight: 200,
+
+        tool: false,
+        resizeable: false
+    },
 }

@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import Window from "~/components/window.vue"
+
+const id = useId();
+const manager = useWindowManager();
+function open(appId) {
+    manager.open(appId);
+} 
 </script>
 
 <template>
-    <!-- <Window title="Welcome!" :width="600" :height="310" :posX="700" :posY="300" :resizeable="false" :tool="true"> -->
     <div class="content">
         <div class="header">
             <div class="striped-bg">
-                <img src="~/assets/logos/Docs.png" alt="DispoVer Logo" class="logo" />
+                <img src="~/assets/logos/Settings.png" alt="DispoVer Logo" class="logo" />
                 <span>
-                    <h2>DispoVer</h2>
-                    <p>hey kid, you want some... information?</p>
+                    <h2>DispoRun</h2>
+                    <p>Type in the ID of any app and Disposition will open it for you.</p>
                 </span>
             </div>
 
@@ -17,40 +23,35 @@
         </div>
 
         <div class="main">
-            <pre>Hack Club Disposition
-Version 0.1 (Build 15: Service Pack 1)
-Copyright (c) 2026 Absolutely no one. Some rights reserved.
-The Disposition operating system and its user interface are protected by the wonderful MIT license.
-
-
-
-This product is licensed under the MIT license to:
-    you!!
-            </pre>
+            <input type="text" placeholder="welcome" />
+            <div class="buttons">
+                <button>OK</button>
+                <button @click="manager.close(id)">Cancel</button>
+            </div>
         </div>
     </div>
-    <!-- </Window> -->
 </template>
 
 <style scoped>
-.fun-fact p {
-    margin: 0;
-    padding-left: 10px;
-    padding-bottom: 10px;
+.main {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.fun-fact span {
-    margin: 0;
+.buttons {
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    padding-left: 10px;
     gap: 5px;
 }
 
+.buttons button {
+    width: 100px;
+}
+
 .logo {
-    width: 60px;
+    width: 30px;
     height: 60px;
 
     filter: drop-shadow(0 0 0.2rem black);
@@ -105,13 +106,5 @@ This product is licensed under the MIT license to:
 .content {
     display: flex;
     flex-direction: column;
-}
-
-.main {
-    padding: 10px;
-}
-
-.main pre {
-    font-size: 14px;
 }
 </style>
