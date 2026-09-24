@@ -34,6 +34,4 @@ if (!isTypeOpen("welcome")) open("welcome");
             <TaskbarItem v-if="!w.tool" :instance="w" />
         </template>
     </Taskbar>
-     
-    <StartMenu />
 </template>

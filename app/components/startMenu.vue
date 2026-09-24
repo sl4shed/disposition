@@ -8,7 +8,7 @@ const manager = useWindowManager();
     <div class="startMenu">
         <div class="left">
             <div class="header">
-                <img src="~/assets/logos/Disposition.png" alt="Disposition logo"/>
+                <img src="~/assets/logos/Disposition.png" alt="Disposition logo" />
                 <span>
                     <h1>Disposition</h1>
                     <p>a physical-media based ysws</p>
@@ -16,7 +16,7 @@ const manager = useWindowManager();
             </div>
 
             <div class="apps">
-                <template v-for="app in APPS"> 
+                <template v-for="app in APPS">
                     <div v-if="!app.tool" class="app" @click="manager.open(app.appId)">
                         <img :src="ICONS[app.appId]" />
                         <p>{{ app.title }}</p>
@@ -27,34 +27,28 @@ const manager = useWindowManager();
         </div>
 
         <div class="right">
+            <!-- here we can put some tool apps like dispover. not all of the tool apps tho -->
+            <div class="menu-item" @click="manager.open('winver')">DispoVer</div>
+            <div class="menu-item">Sign Out</div>
 
-             <div class="menu-item">More button</div>
-             <div class="menu-item">Sign Out</div>
-           
-           
-
-                <div class="menu-profile">
+            <div class="menu-profile">
                     
                 <span>
                 <b>Username</b>
                 <img class="profile-pic" src="C:\Users\Hax\Desktop\disposition\app\assets\icons\profile.png"></img>
                 </span>
-
-                </div>
-
-                
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-
 .startMenu {
     background: linear-gradient(0deg, #525252 0%, #050505 100%);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border: 2px solid #797979;
-    
+
     width: 350px;
     height: 450px;
 
@@ -65,7 +59,6 @@ const manager = useWindowManager();
 .left {
     height: 100%;
     width: 65%;
-    
 
     padding: 2px;
 
@@ -98,17 +91,16 @@ const manager = useWindowManager();
 
 .right {
     height: 100%;
-    width:35%;
+    width: 35%;
 
-    color:  white;
+    color: white;
 
     display: flex;
     flex-direction: column;
     gap: 3px;
     align-items: center;
     justify-content: end;
-    padding-bottom: 10px;  
-
+    padding-bottom: 10px;
 }
 
 .menu-profile {
@@ -141,18 +133,16 @@ const manager = useWindowManager();
     width: 90%;
     text-align: center;
     transition: 0.2s;
-    
-    user-select: none;
-    
 
+    user-select: none;
 }
 
-.menu-item:hover { 
+.menu-item:hover {
     font-size: larger;
     font-weight: bold;
     cursor: pointer;
-    
 }
+
 .apps {
     border: 2px solid #797979;
     background-color: white;
@@ -168,7 +158,6 @@ const manager = useWindowManager();
 
 .app p {
     margin: 0;
-    
 }
 
 .app {

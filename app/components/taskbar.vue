@@ -1,11 +1,26 @@
 <script setup lang="ts">
+import { Transition } from 'vue';
+import StartMenu from './startMenu.vue';
 
+let isOpen = useState("startMenuOpen", () => false);
+
+function sopen() {
+    if(isOpen.value) {
+        isOpen.value = false;
+    }
+}
 </script>
 
 <template>
+    <div class="start-shell" @click.passive="sopen" :style="{
+        zIndex: isOpen ? 9999 : 0,
+    }">
+        <StartMenu v-if="isOpen" />
+    </div>
+
     <div class="taskbar">
         <div class="left">
-            <button class="start"></button>
+            <button class="start" @click="isOpen=!isOpen"></button>
         </div>
 
         <div class="divider"></div>
@@ -27,6 +42,20 @@
 </template>
 
 <style>
+.start-shell {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: start;
+    padding-bottom: calc(35px - 2px);
+}
+
 .taskbar {
     position: absolute;
     width: 100vw;
@@ -47,7 +76,7 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    z-index: 10;
+    z-index: 9999;
 }
 
 .divider {

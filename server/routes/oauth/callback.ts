@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     const savedState = getCookie(event, "oauth_state");
     deleteCookie(event, "oauth_state");
 
-    if(!code || !state || state !== savedState) {
+    if (!code || !state || state !== savedState) {
         throw createError({
             statusCode: 401,
             statusMessage: "Invalid OAuth State"
@@ -25,13 +25,35 @@ export default defineEventHandler(async (event) => {
         }
     );
 
-    const identity = await $fetch<any>("https://auth.hackclub.com/api/v1/me", {
+    const response = await $fetch<{
+        identity: {
+            id: string;
+            first_name: string;
+            last_name: string;
+            primary_email: string;
+            slack_id: string;
+            ysws_eligible: boolean;
+            verification_status: string;
+        };
+        scopes: string[];
+    }>("https://auth.hackclub.com/api/v1/me", {
         headers: {
             Authorization: `Bearer ${tokens.access_token}`
         }
     });
 
-    console.log(identity);
+    const identity = response.identity;
+    await setUserSession(event, {
+        user: {
+            id: identity.id,
+            name: `${identity.first_name} ${identity.last_name}`,
+            email: identity.primary_email,
+            slackId: identity.slack_id,
+            yswsEligible: identity.ysws_eligible,
+            verificationStatus: identity.verification_status
+        },
+        secure: { hcRefreshToken: tokens.refresh_token }, // not exposed to client
+    })
 
     return sendRedirect(event, '/');
 });

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: ['@nuxt/content'],
+	modules: ['@nuxt/content', 'nuxt-auth-utils'],
 	compatibilityDate: '2025-07-15',
 	devtools: { enabled: true },
 
@@ -12,6 +12,10 @@ export default defineNuxtConfig({
 
 		public: {
 			baseUrl: "http://localhost:3000"
+		},
+
+		database: {
+			url: process.env.DATABASE_URL
 		}
 	}
 })

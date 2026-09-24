@@ -25,17 +25,16 @@ function rsvp() {
         </div>
 
         <div class="main">
-            <p>
-                Hack Club Disposition <br />
-                Version 0.1 (Build 15: Service Pack 1) <br />
-                Copyright (c) 2026 Absolutely no one. Some rights reserved. <br />
-                The Disposition operating system and its user interface are protected by the wonderful MIT license. <br />
+            <pre>Hack Club Disposition
+Version 0.1 (Build 15: Service Pack 1)
+Copyright (c) 2026 Absolutely no one. Some rights reserved.
+The Disposition operating system and its user interface are protected by the wonderful MIT license.
 
-                <br /><br /><br /><br /><br /><br /><br />
 
-                This product is licensed under the MIT license to: <br />
-                    you!!
-            </p>
+
+This product is licensed under the MIT license to:
+    you!!
+            </pre>
         </div>
     </div>
     <!-- </Window> -->
