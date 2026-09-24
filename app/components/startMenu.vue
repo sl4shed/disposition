@@ -35,8 +35,9 @@ const manager = useWindowManager();
 
                 <div class="menu-profile">
                     
-                <span>Username
-                <img height="25px" width="25px" src="C:\Users\Hax\Desktop\disposition\app\assets\icons\profile.png"></img>
+                <span>
+                <b>Username</b>
+                <img class="profile-pic" src="C:\Users\Hax\Desktop\disposition\app\assets\icons\profile.png"></img>
                 </span>
 
                 </div>
@@ -118,9 +119,22 @@ const manager = useWindowManager();
     padding: 2px;
     width: 90%;
 
+    user-select: none;
+
 }
 
+.menu-profile span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
 
+.profile-pic {
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+}
 
 .menu-item {
     padding: 2px;
