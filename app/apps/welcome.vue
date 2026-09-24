@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import Window from "~/components/window.vue"
-
-let funFact = "I love eating shawarma.";
+let funFacts = [
+    "I love eating shawarma!",
+    "The fetuccini sequence or something like that"
+];
 
 const manager = useWindowManager();
 
@@ -51,7 +52,7 @@ async function rsvp() {
                         <img src="~/assets/logos/Docs.png" alt="Information Icon" width="40px" height="40px" />
                         <h3>Fun Fact!</h3>
                     </span>
-                    <p>{{ funFact }}</p>
+                    <p>{{ funFacts[0] }}</p>
                 </div>
 
                 <div class="buttons">
