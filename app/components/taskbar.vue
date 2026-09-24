@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Transition } from 'vue';
+import { Transition, onMounted, onUnmounted } from 'vue';
 import StartMenu from './startMenu.vue';
 
 let isOpen = useState("startMenuOpen", () => false);
@@ -9,6 +9,48 @@ function sopen() {
         isOpen.value = false;
     }
 }
+
+let clockTimeout: ReturnType<typeof setTimeout>;
+let dateTimeout: ReturnType<typeof setTimeout>;
+
+function startTime() {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+
+    const clockFunction = document.getElementById('clockFunction');
+    if (clockFunction) {
+        clockFunction.innerHTML = h + ":" + m + ":" + s;
+    }
+    clockTimeout = setTimeout(startTime, 1000);
+}
+
+function checkTime(i) {
+    if (i < 10) { i = "0" + i };
+    return i;
+}
+
+function startDate() {
+    const today = new Date();
+    const dateEl = document.getElementById('dateFunction');
+    if (dateEl) {
+        dateEl.innerHTML = today.toLocaleDateString();
+    }
+    dateTimeout = setTimeout(startDate, 1000 * 60);
+}
+
+onMounted(() => {
+    startTime();
+    startDate();
+});
+
+onUnmounted(() => {
+    clearTimeout(clockTimeout);
+    clearTimeout(dateTimeout);
+});
 </script>
 
 <template>
@@ -26,15 +68,17 @@ function sopen() {
         <div class="divider"></div>
 
         <div class="middle">
-            <slot />
+            <slot/>
         </div>
+
+        <div class="divider"></div>
 
         <div class="right">
             <!-- calendar, clock, announcements, idk -->
 
             <div class="clock">
-                <p></p>
-                <p></p>
+                <div id="clockFunction"></div>
+                <div id="dateFunction"></div>
             </div>
             <div class="hours"></div>
         </div>
@@ -83,6 +127,23 @@ function sopen() {
     height: 100%;
     width: 2px;
     background-color: #797979;
+}
+
+.clock {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 10px;
+
+}
+
+#clockFunction {
+    user-select: none;
+
+}
+
+#dateFunction {
+    user-select: none;
 }
 
 .middle {

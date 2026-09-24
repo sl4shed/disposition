@@ -7,7 +7,7 @@ const manager = useWindowManager();
 <template>
     <div class="startMenu">
         <div class="left">
-            <div class="header">
+            <div class="header"> 
                 <img src="~/assets/logos/Disposition.png" alt="Disposition logo" />
                 <span>
                     <h1>Disposition</h1>
