@@ -1,4 +1,4 @@
-import { mysqlTable, mysqlSchema, AnyMySqlColumn, char, datetime } from "drizzle-orm/mysql-core"
+import { mysqlTable, mysqlSchema, AnyMySqlColumn, tinyint, char, datetime } from "drizzle-orm/mysql-core"
 import { sql } from "drizzle-orm"
 
 export const rsvps = mysqlTable("rsvps", {
@@ -7,4 +7,6 @@ export const rsvps = mysqlTable("rsvps", {
 	slackId: char("slack_id", { length: 16 }).notNull(),
 	name: char("name", { length: 255 }).notNull(),
 	timestamp: datetime().default(new Date("NULLZ")).generatedAlwaysAs(sql`current_timestamp()`, { mode: "virtual" }),
+	yswsEligible: tinyint("ysws_eligible").notNull(),
+	verificationStatus: char("verification_status", { length: 16 }).notNull(),
 });

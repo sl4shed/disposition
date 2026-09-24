@@ -19,12 +19,14 @@ export default defineEventHandler(async (event) => {
         setResponseStatus(event, 409);
         return { message: "RSVP already exists" };
     }
-
+    
     const rsvp: typeof rsvps.$inferInsert = {
         hcaId: session.user.id,
         slackId: session.user.slackId,
         email: session.user.email,
-        name: session.user.name
+        name: session.user.name,
+        yswsEligible: session.user.yswsEligible,
+        verificationStatus: session.user.verificationStatus
     };
 
     await db.insert(rsvps).values(rsvp);

@@ -32,6 +32,8 @@ export default defineEventHandler(async (event) => {
             last_name: string;
             primary_email: string;
             slack_id: string;
+            ysws_eligible: boolean;
+            verification_status: string;
         };
         scopes: string[];
     }>("https://auth.hackclub.com/api/v1/me", {
@@ -41,14 +43,14 @@ export default defineEventHandler(async (event) => {
     });
 
     const identity = response.identity;
-
-    console.log(identity);
     await setUserSession(event, {
         user: {
             id: identity.id,
             name: `${identity.first_name} ${identity.last_name}`,
             email: identity.primary_email,
-            slackId: identity.slack_id
+            slackId: identity.slack_id,
+            yswsEligible: identity.ysws_eligible,
+            verificationStatus: identity.verification_status
         },
         secure: { hcRefreshToken: tokens.refresh_token }, // not exposed to client
     })
