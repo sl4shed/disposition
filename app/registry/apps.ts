@@ -7,13 +7,13 @@ import Run from "~/apps/misc/run.vue"
 import Rigby from "~/apps/misc/rigby.vue"
 import AdminStats from "~/apps/admin/adminStats.vue"
 import Config from "~/apps/config.vue"
-import Shop from "~/apps/shop.vue"
+import Shop from "~/apps/shop/shop.vue"
 import Notification from "~/apps/notification.vue"
 import projectManager from "~/apps/projectManager.vue"
 import profileViewer from "~/apps/profileViewer.vue"
-import AdminShop from "~/apps/admin/adminShop.vue"
+import AdminShop from "~/apps/admin/shop/adminShop.vue"
 import ProfileEdit from "~/apps/profileEdit.vue"
-import AdminShopAddItem from "~/apps/admin/adminShopAddItem.vue"
+import AdminShopAddItem from "~/apps/admin/shop/adminShopAddItem.vue"
 
 export const APPS: { [key: string]: AppDef } = {
 
